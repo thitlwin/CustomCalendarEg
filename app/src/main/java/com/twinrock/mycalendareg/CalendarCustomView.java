@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +32,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class CalendarCustomView extends LinearLayout {
+    String TAG = getClass().getName();
     ImageButton PreviouseButton,NextButton;
     TextView CurrentDate;
     GridView gridView;
@@ -46,8 +48,6 @@ public class CalendarCustomView extends LinearLayout {
     DBOpenHelper dbOpenHelper;
     AlertDialog alertDialog;
     MyGridAdapter adapter;
-
-
 
     public CalendarCustomView(Context context) {
         super(context);
@@ -218,12 +218,16 @@ public class CalendarCustomView extends LinearLayout {
 
         COllectEventsPerMonth(monthFormat.format(calendar.getTime()),yearFormat.format(calendar.getTime()));
 
-
+        Log.i(TAG, "dateList Size (before) = "+dateList.size());
         while (dateList.size() < MAX_CALENDAR_Days){
+            Log.i(TAG, "monthCalendar.getTime() = "+monthCalendar.getTime());
             dateList.add(monthCalendar.getTime());
             monthCalendar.add(Calendar.DAY_OF_MONTH,1);
+            Log.i(TAG, "Calendar.DAY_OF_MONTH = "+Calendar.DAY_OF_MONTH);
 
         }
+
+        Log.i(TAG, "dateList Size (after) = "+dateList.size());
         adapter = new MyGridAdapter(context,dateList,calendar,eventsList);
         gridView.setAdapter(adapter);
 

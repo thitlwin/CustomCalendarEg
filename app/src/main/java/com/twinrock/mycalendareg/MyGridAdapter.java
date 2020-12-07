@@ -69,7 +69,8 @@ public class MyGridAdapter extends ArrayAdapter {
         ArrayList<String> arrayList = new ArrayList<>();
         for (int i  = 0;i < eventsList.size();i++){
             eventCalendar.setTime(convertStringToDate(eventsList.get(i).getDate()));
-            if(dayNo == eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth == eventCalendar.get(Calendar.MONTH)+1
+            if(dayNo == eventCalendar.get(Calendar.DAY_OF_MONTH) &&
+                    displayMonth == eventCalendar.get(Calendar.MONTH)+1
                     && displayYear == eventCalendar.get(Calendar.YEAR)){
                 arrayList.add(eventsList.get(i).getEvent());
                 eventText.setText(arrayList.size()+" events");
